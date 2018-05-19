@@ -1,0 +1,13 @@
+syntax = "proto2";
+
+
+package MCMediaLibrary;
+
+
+message MediaFile {
+  required string filename = 1;
+  required int32 numentries = 2;
+  optional string artist = 3;
+  optional string title = 4;
+  optional string album = 5;
+}

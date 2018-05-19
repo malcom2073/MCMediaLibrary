@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+
+package MCMediaLibrary;
+import "MediaFile.proto";
+
+message Playlist {
+  required string name = 1;
+  repeated MediaFile mediafiles = 2;
+}

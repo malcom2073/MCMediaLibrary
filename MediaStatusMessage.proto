@@ -1,0 +1,10 @@
+syntax = "proto2";
+
+
+package MCMediaLibrary;
+
+
+message Status {
+  required string status = 1;
+  required int32 numentries = 2;
+}
