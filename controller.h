@@ -21,6 +21,7 @@ signals:
 private slots:
 	void publishMessage(QString name,QByteArray data);
 	void ipcConnected();
+	void ptpMessageReceived(QString target,QString sender,QByteArray payload);
 public slots:
 };
 

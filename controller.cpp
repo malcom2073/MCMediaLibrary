@@ -5,6 +5,7 @@
 #include "MediaStatusMessage.pb.h"
 #include "Playlist.pb.h"
 #include "MediaFile.pb.h"
+#include <QDebug>
 
 Controller::Controller(QObject *parent) : QObject(parent)
 {
@@ -12,6 +13,7 @@ Controller::Controller(QObject *parent) : QObject(parent)
 	connect(m_ipc,SIGNAL(si_publishMessage(QString,QByteArray)),this,SLOT(publishMessage(QString,QByteArray)));
 	m_ipc->connectToHost("127.0.0.1",12345);
 	connect(m_ipc,SIGNAL(si_connected()),this,SLOT(ipcConnected()));
+	connect(m_ipc,SIGNAL(si_ptpMessageReceived(QString,QString,QByteArray)),this,SLOT(ptpMessageReceived(QString,QString,QByteArray)));
 	MCMediaLibrary::Status statusmsg;
 	statusmsg.set_status("test");
 	statusmsg.set_numentries(23);
@@ -19,6 +21,12 @@ Controller::Controller(QObject *parent) : QObject(parent)
 
 	//statusmsg.
 }
+void Controller::ptpMessageReceived(QString target,QString sender,QByteArray payload)
+{
+	qDebug() << "Got message from:" << target << "for" << sender;
+	qDebug() << payload;
+}
+
 void Controller::ipcConnected()
 {
 	MediaScanner *scanner = new MediaScanner(this);
